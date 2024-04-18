@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using EducationPlatform.Domain.Entity;
 
-namespace Consultorio.Infra.Data.Configurations
+namespace EducationPlatform.Infra.Data.Configurations
 {
     public class SignatureConfiguration : IEntityTypeConfiguration<Signature>
     {
@@ -12,7 +12,16 @@ namespace Consultorio.Infra.Data.Configurations
 
             builder.Property(x => x.Name)
                    .IsRequired()
-                   .HasMaxLength(100);            
+                   .HasMaxLength(100);
+            builder.HasData(
+                new Signature
+                {
+                    Id = 1,
+                    Name = "Padrão",
+                    Duration = 365,
+                    IsActive = true,
+                }
+                );
         }
     }
 }

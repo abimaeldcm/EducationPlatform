@@ -9,9 +9,11 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="13.0.1" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\EducationPlatform.Domain\EducationPlatform.Domain.csproj" />
+	  <ProjectReference Include="..\EducationPlatform.Infra.Data\EducationPlatform.Infra.Data.csproj" />
 	</ItemGroup>
 </Project>

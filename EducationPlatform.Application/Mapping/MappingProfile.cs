@@ -1,37 +1,26 @@
 ﻿using AutoMapper;
-using Consultorio.Domain.Entity;
-using Consultorio.Domain.Entity.Email;
-using Consultorio.Domain.Entity.InputDTOs;
-using Consultorio.Domain.Entity.OutputDTOs;
-using Consultorio.Domain.Entity.OutPutDTOs;
+using EducationPlatform.Domain.Entity;
 
-namespace Consultorio.Application.Mapping
+namespace EducationPlatform.Application.Mapping
 {
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
-            CreateMap<ConsultInputDTO, Consult>();
-            CreateMap<Consult, ConsultOutputDTO>();
+            CreateMap<BlockInput, Block>();
+            CreateMap<Block, BlockOutput>();
 
-            CreateMap<SpecialityInputDTO, Speciality>();
-            CreateMap<Speciality, SpecialityOutputDTO>();
+            CreateMap<CourseInput, Course>();
+            CreateMap<Course, CourseOutput>();
 
-            CreateMap<DoctorInputDTO, Doctor>();
-            CreateMap<Doctor, DoctorOutputDTO>();
+            CreateMap<LessonInput, Lesson>();
+            CreateMap<Lesson, LessonOutput>();
 
-            CreateMap<PatientInputDTO, Patient>();
-            CreateMap<Patient, PatientOutputDTO>();
+            CreateMap<SignatureInput, Signature>();
+            CreateMap<Signature, SignatureOutput>();
 
-            CreateMap<ServiceInputDTO, ServiceEntity>();
-            CreateMap<ServiceEntity, ServiceOutputDTO>();
-            
-            CreateMap<EmailInputDTO, EmailEntity>();
-            CreateMap<EmailEntity, EmailOutputDTO>();
-
-            CreateMap<UserInputDTO, User>();
-            CreateMap<User, UserOutputDTO>();
-            
+            CreateMap<UserInput, UserEntity>();
+            CreateMap<UserEntity, UserOutput>();            
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Consultorio.Domain.Entity.Enum;
+﻿using EducationPlatform.Domain.Entity.Enum;
 
 namespace EducationPlatform.Domain.Entity
 {

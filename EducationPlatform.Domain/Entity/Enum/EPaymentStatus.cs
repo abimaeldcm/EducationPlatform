@@ -1,4 +1,4 @@
-﻿namespace Consultorio.Domain.Entity.Enum
+﻿namespace EducationPlatform.Domain.Entity.Enum
 {
     public enum EPaymentStatus : int
     {

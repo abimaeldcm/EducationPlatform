@@ -1,9 +1,9 @@
 ﻿using EducationPlatform.Domain.Entity;
 
-namespace Consultorio.Infra.Data.Interfaces
+namespace EducationPlatform.Infra.Data.Interfaces
 {
     public interface ILoginRepository
     {
-        Task<User> FindLogin(string name, string password);
+        Task<UserEntity> FindLogin(string name, string password);
     }
 }

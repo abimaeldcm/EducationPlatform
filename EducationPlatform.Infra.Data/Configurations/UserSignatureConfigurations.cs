@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using EducationPlatform.Domain.Entity.EntityRelational;
 
-namespace Consultorio.Infra.Data.Configurations
+namespace EducationPlatform.Infra.Data.Configurations
 {
     public class UserSignatureConfiguration : IEntityTypeConfiguration<UserSignature>
     {
@@ -12,13 +12,12 @@ namespace Consultorio.Infra.Data.Configurations
 
             builder.HasOne(us => us.User)
                    .WithMany()
-                   .HasForeignKey(us => us.IdUser)
+                    .HasForeignKey(ulc => ulc.UserId)
                    .IsRequired();
 
             builder.HasOne(us => us.Signature)
                    .WithMany()
-                   .HasForeignKey(us => us.IdSignature)
-                   .OnDelete(DeleteBehavior.Cascade)
+                   .HasForeignKey(ulc => ulc.SignatureId)
                    .IsRequired();
         }
     }

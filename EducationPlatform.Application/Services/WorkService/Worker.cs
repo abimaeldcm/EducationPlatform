@@ -1,21 +1,13 @@
-﻿using Consultorio.Application.Email;
-using Consultorio.Domain.Entity.Email;
-using Consultorio.Infra.Data;
-using Consultorio.Infra.Data.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 
-namespace Consultorio.Application.Services.WorkService
+namespace EducationPlatform.Application.Services.WorkService
 {
     public class Worker : BackgroundService
     {
-        private readonly ISeedEmail _seedEmail;
         private readonly IServiceProvider _serviceProvider;
 
-        public Worker(ISeedEmail seedEmail, IServiceProvider serviceProvider)
+        public Worker(IServiceProvider serviceProvider)
         {
-            _seedEmail = seedEmail;
             _serviceProvider = serviceProvider;
         }
 
@@ -23,9 +15,9 @@ namespace Consultorio.Application.Services.WorkService
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                using (var scope = _serviceProvider.CreateScope())
+                /* using (var scope = _serviceProvider.CreateScope())
                 {
-                    var context = scope.ServiceProvider.GetRequiredService<ConsultorioDbContext>();
+                    var context = scope.ServiceProvider.GetRequiredService<EducationDbContext>();
                     var emailRepository = scope.ServiceProvider.GetRequiredService<ICRUDRepository<EmailEntity>>();
                     var consult = context.Consults
                         .Include(x => x.Patient)
@@ -35,7 +27,7 @@ namespace Consultorio.Application.Services.WorkService
                         .AsNoTracking()
                         .ToList();
 
-                    foreach (var item in consult)
+                   foreach (var item in consult)
                     {
                         //Seed E-mail
                         var emailDb = await emailRepository.FindById(1);
@@ -49,7 +41,7 @@ namespace Consultorio.Application.Services.WorkService
                         //var resultado = await _seedEmail.Seed(item.Patient.Email, emailSubject, emailBody);
                     }
 
-                }
+                }*/
                 await Task.Delay(86400000, stoppingToken);
             }
         }

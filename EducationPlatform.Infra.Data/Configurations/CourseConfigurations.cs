@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using EducationPlatform.Domain.Entity;
 
-namespace Consultorio.Infra.Data.Configurations
+namespace EducationPlatform.Infra.Data.Configurations
 {
     public class CourseConfiguration : IEntityTypeConfiguration<Course>
     {
@@ -19,6 +19,17 @@ namespace Consultorio.Infra.Data.Configurations
 
             builder.HasMany(x => x.Block)
                    .WithOne(b => b.Course);
+
+            builder.HasData(
+                new Course
+                {
+                    Id = 1,
+                    Name = "Introdução o C#",
+                    Description = "Iniciando pelo básico do C#",
+                    Cover = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.treinaweb.com.br%2Fblog%2Fcomo-instalar-o-csharp-e-nosso-primeiro-exemplo&psig=AOvVaw1j2JR7fNFScafseX_uX4qA&ust=1713292306049000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPDhk67txIUDFQAAAAAdAAAAABAE",
+                    CreationDate = DateTime.Now,
+                    SignatureId = 1,
+                });
         }
     }
 

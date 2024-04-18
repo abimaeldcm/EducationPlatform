@@ -7,7 +7,7 @@
         public int IdLesson { get; set; }
         public DateTime FinishedLesson { get; set; }
 
-        public User User { get; set; }
+        public UserEntity User { get; set; }
         public Lesson Lesson { get; set; }
     }
 }

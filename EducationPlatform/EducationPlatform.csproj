@@ -10,11 +10,19 @@
 		<PackageReference Include="FluentValidation" Version="11.9.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\EducationPlatform.Application\EducationPlatform.Application.csproj" />
+	  <ProjectReference Include="..\EducationPlatform.Domain\EducationPlatform.Domain.csproj" />
+	  <ProjectReference Include="..\EducationPlatform.Infra.IoC\EducationPlatform.Infra.IoC.csproj" />
 	</ItemGroup>
 
 </Project>

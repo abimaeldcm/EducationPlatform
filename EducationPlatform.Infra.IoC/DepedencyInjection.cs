@@ -1,77 +1,49 @@
-﻿using Consultorio.Application.Calendario;
-using Consultorio.Application.Email;
-using Consultorio.Application.Interface;
-using Consultorio.Application.Mapping;
-using Consultorio.Application.Service;
-using Consultorio.Application.Services;
-using Consultorio.Application.Services.WorkService;
-using Consultorio.Application.Validations;
-using Consultorio.Domain.Entity;
-using Consultorio.Domain.Entity.Email;
-using Consultorio.Domain.Entity.InputDTOs;
-using Consultorio.Domain.Entity.OutputDTOs;
-using Consultorio.Domain.Entity.OutPutDTOs;
-using Consultorio.Infra.Data;
-using Consultorio.Infra.Data.Interfaces;
-using Consultorio.Infra.Data.Repository;
-using FluentValidation.AspNetCore;
-using Microsoft.EntityFrameworkCore;
+﻿using EducationPlatform.Application.Interface;
+using EducationPlatform.Application.Service;
+using EducationPlatform.Application.Services;
+using EducationPlatform.Domain.Entity;
+using EducationPlatform.Infra.Data.Interfaces;
+using EducationPlatform.Infra.Data.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Security.Claims;
 
-namespace Consultorio.Infra.IoC
+namespace EducationPlatform.Infra.IoC
 {
-    public static class DepedencyInjection
+    public static class Injections
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services,
+        public static IServiceCollection AddInjections(this IServiceCollection services,
                       IConfiguration Configuration)
-        {
-            services.AddAutoMapper(typeof(MappingProfile).Assembly);
-
-            services.AddDbContext<ConsultorioDbContext>(opt =>
-                    opt.UseSqlServer(Configuration.GetConnectionString("DataBase"),
-                    b => b.MigrationsAssembly(typeof(ConsultorioDbContext).Assembly.FullName)));
-
+        {            
             //Atendimento
-            services.AddScoped<ICRUDService<ConsultOutputDTO,ConsultInputDTO>, ConsultService>();
-            services.AddScoped<ICRUDRepository<Consult>, ConsultRepository>();
+            services.AddScoped<ICRUDService<BlockOutput,BlockInput>, BlockService>();
+            services.AddScoped<ICRUDRepository<Block>, BlockRepository>();
             
             //Espacialidade
-            services.AddScoped<ICRUDService<SpecialityOutputDTO,SpecialityInputDTO>, SpecialityService>();
-            services.AddScoped<ICRUDRepository<Speciality>, EspecialidadeRepository>();
+            services.AddScoped<ICRUDService<CourseOutput, CourseInput>, CourseService>();
+            services.AddScoped<ICRUDRepository<Course>, CourseRepository>();
 
             //Médico
-            services.AddScoped<ICRUDService<DoctorOutputDTO,DoctorInputDTO>, DoctorService>();
-            services.AddScoped<ICRUDRepository<Doctor>, DoctorRepository>();
+            services.AddScoped<ICRUDService<LessonOutput, LessonInput>, LessonService>();
+            services.AddScoped<ICRUDRepository<Lesson>, LessonRepository>();
 
             //Paciente
-            services.AddScoped<ICRUDService<PatientOutputDTO,PatientInputDTO>, PatientService>();
-            services.AddScoped<ICRUDRepository<Patient>, PatientRepository>();
+            services.AddScoped<ICRUDService<SignatureOutput, SignatureInput>, SignatureService>();
+            services.AddScoped<ICRUDRepository<Signature>, SignatureRepository>();
 
             //Servico
-            services.AddScoped<ICRUDService<ServiceOutputDTO,ServiceInputDTO>, ServiceService>();
-            services.AddScoped<ICRUDRepository<ServiceEntity>, ServiceRepository>();
-
-            //Email
-            services.AddScoped<ICRUDService<EmailOutputDTO, EmailInputDTO>,EmailService >();
-            services.AddScoped<ICRUDRepository<EmailEntity>, EmailRepository>();
+            services.AddScoped<ICRUDService<UserOutput, UserInput>, UserService>();
+            services.AddScoped<ICRUDRepository<UserEntity>, UserEntityRepository>();           
             
             //User
-            services.AddScoped<ICRUDService<UserOutputDTO, UserInputDTO>, UserService>();
-            services.AddScoped<ICRUDRepository<User>, UserRepository>();
+            services.AddScoped<ICRUDService<UserOutput, UserInput>, UserService>();
+            services.AddScoped<ICRUDRepository<UserEntity>, UserEntityRepository>();
             services.AddScoped<ILoginService, UserService>();
-            services.AddScoped<ILoginRepository, UserRepository>();
+            services.AddScoped<ILoginRepository, UserEntityRepository>();
 
-            services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<SpecialityValidation>());
-
-            services.AddSingleton<ISeedEmail, SeedEmail>();
-            services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
-
-
-            services.AddHostedService<Worker>();
+            services.AddScoped<ClaimsPrincipal>();
 
             return services;
-
         }
     }
 }

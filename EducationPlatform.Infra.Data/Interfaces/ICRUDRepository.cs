@@ -1,6 +1,4 @@
-﻿using Consultorio.Domain.Entity;
-
-namespace Consultorio.Infra.Data.Interfaces
+﻿namespace EducationPlatform.Infra.Data.Interfaces
 {
     public interface ICRUDRepository<T> where T : class
     {

@@ -1,8 +1,9 @@
-﻿namespace Consultorio.Domain.Entity.Enum
+﻿namespace EducationPlatform.Domain.Entity.Enum
 {
     public enum EProfile : int
     {
-        Manager,
-        Student
+        FullAccess,
+        Start,
+        Expert
     }
 }

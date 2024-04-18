@@ -1,4 +1,4 @@
-﻿namespace Consultorio.Application.Interface
+﻿namespace EducationPlatform.Application.Interface
 {
     public interface ICRUDService<T, U> where T : class where U : class
     {

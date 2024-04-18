@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Consultorio.Infra.Data.Configurations
+namespace EducationPlatform.Infra.Data.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
             builder.HasKey(x => x.Id);
 
@@ -29,10 +29,34 @@ namespace Consultorio.Infra.Data.Configurations
             builder.Property(x => x.PhoneNumber)
                    .HasMaxLength(20);
 
-            builder.HasMany(us => us.Courses)
-                   .WithOne()
-                   .IsRequired()
-                   .OnDelete(DeleteBehavior.Cascade); 
+            builder.HasData(
+                new UserEntity
+                {
+                    Id = 1,
+                    FullName = "abi",
+                    CPF = "06445661327",
+                    Email = "abi@mail.com",
+                    Birthday = new DateTime(1997, 04, 25),
+                    AccessLevel = Domain.Entity.Enum.EAccessLevel.Manager,
+                    IsActive = true,
+                    PhoneNumber = "86952258855",
+                    Password = "123456789"
+
+                },
+                new UserEntity
+                {
+                    Id = 2,
+                    FullName = "nay",
+                    CPF = "12345678910",
+                    Email = "joao@mail.com",
+                    Birthday = new DateTime(1985, 10, 15),
+                    AccessLevel = Domain.Entity.Enum.EAccessLevel.Student,
+                    IsActive = true,
+                    PhoneNumber = "987654321",
+                    Password = "123456789"
+                }
+                );
+
         }
     }
 }

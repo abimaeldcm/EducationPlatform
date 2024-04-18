@@ -1,10 +1,9 @@
-﻿using Consultorio.Domain.Entity;
-using Consultorio.Domain.Entity.OutputDTOs;
+﻿using EducationPlatform.Domain.Entity;
 
-namespace Consultorio.Application.Interface
+namespace EducationPlatform.Application.Interface
 {
     public interface ILoginService
     {
-        Task<UserOutputDTO> FindLogin(string name, string password);
+        Task<UserOutput> FindLogin(string name, string password);
     }
 }

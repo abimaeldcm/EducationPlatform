@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EducationPlatform.Infra.Data.Configurations
 {
-    public class BlockConfiguration : IEntityTypeConfiguration<Block>
+    public class LessonConfiguration : IEntityTypeConfiguration<Lesson>
     {
-        public void Configure(EntityTypeBuilder<Block> builder)
+        public void Configure(EntityTypeBuilder<Lesson> builder)
         {
             builder.HasKey(x => x.Id);
 
@@ -17,17 +17,16 @@ namespace EducationPlatform.Infra.Data.Configurations
             builder.Property(x => x.Description)
                    .HasMaxLength(500);
 
-            builder.HasOne(x => x.Course)
-                   .WithMany(x => x.Block)
-                   .HasForeignKey(x => x.IdCourse);
             builder.HasData(
-                new Block
+                new Lesson
                 {
                     Id = 1,
-                    Name = "Instalção das ferramentas",
-                    Description = "Description",
+                    Name = "Visual Studio Code",
+                    Description = "Descrição",
+                    LinkVideo = "https://www.youtube.com/watch?v=PZ7HiQdT0Dw",
+                    Duration = 600,
                     CreationDate = DateTime.Now,
-                    IdCourse = 1,
+                    BlockId = 1                    
                 });
         }
     }

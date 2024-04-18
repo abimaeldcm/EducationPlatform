@@ -1,59 +1,58 @@
 ﻿using AutoMapper;
-using Consultorio.Application.Interface;
-using Consultorio.Domain.Entity;
-using Consultorio.Domain.Entity.InputDTOs;
-using Consultorio.Domain.Entity.OutputDTOs;
-using Consultorio.Infra.Data.Interfaces;
+using EducationPlatform.Application.Interface;
+using EducationPlatform.Domain.Entity;
+using EducationPlatform.Domain.Entity.EntityRelational;
+using EducationPlatform.Infra.Data.Interfaces;
 
-namespace Consultorio.Application.Services
+namespace EducationPlatform.Application.Services
 {
-    public class UserService : ICRUDService<UserOutputDTO, UserInputDTO>, ILoginService
+    public class UserService : ICRUDService<UserOutput, UserInput>, ILoginService
     {
 
-        private readonly ICRUDRepository<User> _repository;
+        private readonly ICRUDRepository<UserEntity> _repository;
+        private readonly ICRUDRepository<UserSignature> _signatureRepository;
+        private readonly IUserSignatureRepository _userSignatureRepository;
         private readonly ILoginRepository _loginRepository;
         private readonly IMapper _mapper;
 
-        public UserService(ICRUDRepository<User> repository, ILoginRepository loginRepository, IMapper mapper)
+        public UserService(ICRUDRepository<UserEntity> repository, ICRUDRepository<UserSignature> signatureRepository, IUserSignatureRepository userSignatureRepository, ILoginRepository loginRepository, IMapper mapper)
         {
             _repository = repository;
+            _signatureRepository = signatureRepository;
+            _userSignatureRepository = userSignatureRepository;
             _loginRepository = loginRepository;
             _mapper = mapper;
         }
 
-        public async Task<UserOutputDTO> FindLogin(string name, string password)
+        public async Task<UserOutput> FindLogin(string CPF, string password)
         {
-            var UserDb =  await _loginRepository.FindLogin(name, password);
-            UserOutputDTO UserMap = _mapper.Map<UserOutputDTO>(UserDb);
+            var UserDb =  await _loginRepository.FindLogin(CPF, password);
+            UserOutput UserMap = _mapper.Map<UserOutput>(UserDb);
+
+            UserMap.UserSignature = await _userSignatureRepository.FindByUser(UserDb.Id);
+
             return UserMap;
         }
 
-        public async Task<UserOutputDTO> FindById(int id)
+        public async Task<UserOutput> FindById(int id)
         {
-            User UserDb = await _repository.FindById(id);
-            UserOutputDTO UserMap = _mapper.Map<UserOutputDTO>(UserDb);
+            UserEntity UserDb = await _repository.FindById(id);
+            UserOutput UserMap = _mapper.Map<UserOutput>(UserDb);
             return UserMap;
         }
 
-        public async Task<List<UserOutputDTO>> FindByText(string query)
+        public async Task<List<UserOutput>> GetAll()
         {
-            List<User> UserDb = await _repository.FindByText(query);
-            List<UserOutputDTO> UserMap = _mapper.Map<List<UserOutputDTO>>(UserDb);
+            List<UserEntity> UserDb = await _repository.GetAll();
+            List<UserOutput> UserMap = _mapper.Map<List<UserOutput>>(UserDb);
             return UserMap;
         }
 
-        public async Task<List<UserOutputDTO>> GetAll()
+        public async Task<UserOutput> Create(UserInput create)
         {
-            List<User> UserDb = await _repository.GetAll();
-            List<UserOutputDTO> UserMap = _mapper.Map<List<UserOutputDTO>>(UserDb);
-            return UserMap;
-        }
-
-        public async Task<UserOutputDTO> Create(UserInputDTO create)
-        {
-            User UserCadastro = _mapper.Map<User>(create);
-            User UserDb = await _repository.Create(UserCadastro);
-            UserOutputDTO UserMap = _mapper.Map<UserOutputDTO>(UserDb);
+            UserEntity UserCadastro = _mapper.Map<UserEntity>(create);
+            UserEntity UserDb = await _repository.Create(UserCadastro);
+            UserOutput UserMap = _mapper.Map<UserOutput>(UserDb);
             return UserMap;
         }
 
@@ -62,17 +61,17 @@ namespace Consultorio.Application.Services
             return await _repository.Delete(id);
         }
 
-        public async Task<UserOutputDTO> Update(int id, UserInputDTO update)
+        public async Task<UserOutput> Update(int id, UserInput update)
         {
-            User buscarDb = await _repository.FindById(id);
+            UserEntity buscarDb = await _repository.FindById(id);
             if (buscarDb == null)
             {
                 throw new Exception("User não localizado");
             }
-            User UserUpdate = _mapper.Map<User>(update);
+            UserEntity UserUpdate = _mapper.Map<UserEntity>(update);
             UserUpdate.Id = id;
-            User UserDb = await _repository.Update(UserUpdate);
-            UserOutputDTO UserMap = _mapper.Map<UserOutputDTO>(UserDb);
+            UserEntity UserDb = await _repository.Update(UserUpdate);
+            UserOutput UserMap = _mapper.Map<UserOutput>(UserDb);
             return UserMap;
         }
     }

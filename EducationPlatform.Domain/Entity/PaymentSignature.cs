@@ -1,4 +1,4 @@
-﻿using Consultorio.Domain.Entity.Enum;
+﻿using EducationPlatform.Domain.Entity.Enum;
 using EducationPlatform.Domain.Entity.EntityRelational;
 
 namespace EducationPlatform.Domain.Entity
@@ -16,8 +16,5 @@ namespace EducationPlatform.Domain.Entity
 
         public int IdUserSignature { get; set; }
         public UserSignature UserSignature { get; set; }
-
-        public int IdSignature { get; set; }
-        public Signature Siganature { get; set; }
     }
 }

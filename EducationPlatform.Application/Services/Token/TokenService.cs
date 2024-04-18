@@ -1,12 +1,11 @@
-﻿using Consultorio.Domain.Entity;
-using Consultorio.Domain.Entity.OutputDTOs;
+﻿using EducationPlatform.Domain.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Consultorio.Application.Services.Token
+namespace EducationPlatform.Application.Services.Token
 {
     public static class TokenService
     {
@@ -17,7 +16,7 @@ namespace Consultorio.Application.Services.Token
             _configuration = configuration;
         }
 
-        public static string GenerateToken(UserOutputDTO user)
+        public static string GenerateToken(UserOutput user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("8A12D4C3C10FEB09A772889EAE2F1EFCE260AE78");
@@ -25,8 +24,10 @@ namespace Consultorio.Application.Services.Token
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Name.ToString()),
-                    new Claim(ClaimTypes.Role, user.Role.ToString()),
+                    new Claim("id", user.Id.ToString()),
+                    new Claim("UserSignature", user.UserSignature.SignatureId.ToString()),
+                    new Claim(ClaimTypes.Name, user.FullName.ToString()),
+                    new Claim(ClaimTypes.Role, user.Profile.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(

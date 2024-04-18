@@ -1,37 +1,41 @@
-﻿using FluentValidation;
+﻿using EducationPlatform.Application.Interface;
+using EducationPlatform.Domain.Entity;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Consultorio.API.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace EducationPlatform.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ConsultController : ControllerBase
+    public class CourseController : ControllerBase
     {
-        private readonly ICRUDService<ConsultOutputDTO, ConsultInputDTO> _service;
-        private readonly IValidator<ConsultInputDTO> _validator;
+        private readonly ICRUDService<CourseOutput, CourseInput> _service;
+        private readonly IValidator<CourseInput> _validator;
 
-        public ConsultController(ICRUDService<ConsultOutputDTO, ConsultInputDTO> service, IValidator<ConsultInputDTO> validator)
+        public CourseController(ICRUDService<CourseOutput, CourseInput> service, IValidator<CourseInput> validator)
         {
             _service = service;
             _validator = validator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ConsultOutputDTO>>> GetAll()
+        public async Task<ActionResult<List<CourseOutput>>> GetAll()
         {
             return Ok(await _service.GetAll());
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ConsultOutputDTO>> FindById(int id)
+        public async Task<ActionResult<CourseOutput>> FindById(int id)
         {
-            return Ok (await _service.FindById(id));
+            return Ok(await _service.FindById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<ConsultOutputDTO>> Create([FromBody] ConsultInputDTO create)
+        public async Task<ActionResult<CourseOutput>> Create([FromBody] CourseInput create)
         {
             var result = _validator.Validate(create);
             if (!result.IsValid)
@@ -42,7 +46,7 @@ namespace Consultorio.API.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<ConsultOutputDTO>> Update(int id, [FromBody] ConsultInputDTO update)
+        public async Task<ActionResult<CourseOutput>> Update(int id, [FromBody] CourseInput update)
         {
 
             var result = _validator.Validate(update);
@@ -54,7 +58,7 @@ namespace Consultorio.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "manager")]
+        //[Authorize(Roles = "manager")]
         public async Task<ActionResult<bool>> Delete(int id)
         {
             return Ok(await _service.Delete(id));

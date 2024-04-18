@@ -3,7 +3,7 @@ using EducationPlatform.Domain.Entity.EntityRelational;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace Consultorio.Infra.Data
+namespace EducationPlatform.Infra.Data
 {
     public class EducationDbContext : DbContext
     {
@@ -11,8 +11,8 @@ namespace Consultorio.Infra.Data
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Signature> Signature { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<Signature> Signatures { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Block> Blocks { get; set; }
