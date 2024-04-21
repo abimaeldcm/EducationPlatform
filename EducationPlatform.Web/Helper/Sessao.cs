@@ -12,7 +12,7 @@ namespace EducationPlatform.Web.Helper
             _httpContext = httpContext;
         }
 
-        public void CriarSessaoDoUsuario(Login usuario)
+        public void CriarSessaoDoUsuario(UserLogged usuario)
         {
             string valor = JsonConvert.SerializeObject(usuario); //Tenho que passar omeu obj usuario como string sem perder as informações. Então ésó tranformar em um json.
             _httpContext.HttpContext.Session.SetString("sessaoUsuarioLogado", valor);

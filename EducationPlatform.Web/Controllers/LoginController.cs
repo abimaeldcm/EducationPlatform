@@ -44,7 +44,13 @@ namespace EducationPlatform.Web.Controllers
                 if (usuarioDB != null)
                 {
                     _session.CriarSessaoDoUsuario(usuarioDB);
-                    return RedirectToAction("Index", "Home");
+
+                    if (usuarioDB.User.AccessLevel == Domain.Entity.Enum.EAccessLevel.Student)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                    return RedirectToAction("Index", "HomeAdm");
                 }
                 TempData["MensagemErro"] = "Login ou senha estão incorretos";
 

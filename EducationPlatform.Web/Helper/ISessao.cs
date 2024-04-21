@@ -4,7 +4,7 @@ namespace EducationPlatform.Web.Helper
 {
     public interface ISessao
     {
-        void CriarSessaoDoUsuario(Login usuario);
+        void CriarSessaoDoUsuario(UserLogged usuario);
         void RemoverSessaoUsuario();
         UserLogged BuscarSessaoDoUsuario();
     }
