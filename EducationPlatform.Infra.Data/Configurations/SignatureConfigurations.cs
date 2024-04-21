@@ -13,6 +13,7 @@ namespace EducationPlatform.Infra.Data.Configurations
             builder.Property(x => x.Name)
                    .IsRequired()
                    .HasMaxLength(100);
+
             builder.HasData(
                 new Signature
                 {

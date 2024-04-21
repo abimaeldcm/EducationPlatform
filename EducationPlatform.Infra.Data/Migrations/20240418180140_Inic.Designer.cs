@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducationPlatform.Infra.Data.Migrations
 {
     [DbContext(typeof(EducationDbContext))]
-    [Migration("20240418044212_ini")]
-    partial class ini
+    [Migration("20240418180140_Inic")]
+    partial class Inic
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,7 @@ namespace EducationPlatform.Infra.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreationDate = new DateTime(2024, 4, 18, 1, 42, 12, 439, DateTimeKind.Local).AddTicks(7505),
+                            CreationDate = new DateTime(2024, 4, 18, 15, 1, 39, 601, DateTimeKind.Local).AddTicks(1492),
                             Description = "Description",
                             IdCourse = 1,
                             Name = "Instalção das ferramentas"
@@ -102,7 +102,7 @@ namespace EducationPlatform.Infra.Data.Migrations
                         {
                             Id = 1,
                             Cover = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.treinaweb.com.br%2Fblog%2Fcomo-instalar-o-csharp-e-nosso-primeiro-exemplo&psig=AOvVaw1j2JR7fNFScafseX_uX4qA&ust=1713292306049000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPDhk67txIUDFQAAAAAdAAAAABAE",
-                            CreationDate = new DateTime(2024, 4, 18, 1, 42, 12, 440, DateTimeKind.Local).AddTicks(72),
+                            CreationDate = new DateTime(2024, 4, 18, 15, 1, 39, 601, DateTimeKind.Local).AddTicks(3973),
                             Description = "Iniciando pelo básico do C#",
                             Name = "Introdução o C#",
                             SignatureId = 1
@@ -208,7 +208,7 @@ namespace EducationPlatform.Infra.Data.Migrations
                         {
                             Id = 1,
                             BlockId = 1,
-                            CreationDate = new DateTime(2024, 4, 18, 1, 42, 12, 440, DateTimeKind.Local).AddTicks(1731),
+                            CreationDate = new DateTime(2024, 4, 18, 15, 1, 39, 601, DateTimeKind.Local).AddTicks(5662),
                             Description = "Descrição",
                             Duration = 600,
                             LinkVideo = "https://www.youtube.com/watch?v=PZ7HiQdT0Dw",
@@ -334,12 +334,7 @@ namespace EducationPlatform.Infra.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("SignatureId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SignatureId");
 
                     b.ToTable("Users");
 
@@ -354,8 +349,7 @@ namespace EducationPlatform.Infra.Data.Migrations
                             FullName = "abi",
                             IsActive = true,
                             Password = "123456789",
-                            PhoneNumber = "86952258855",
-                            SignatureId = 1
+                            PhoneNumber = "86952258855"
                         },
                         new
                         {
@@ -367,8 +361,7 @@ namespace EducationPlatform.Infra.Data.Migrations
                             FullName = "nay",
                             IsActive = true,
                             Password = "123456789",
-                            PhoneNumber = "987654321",
-                            SignatureId = 1
+                            PhoneNumber = "987654321"
                         });
                 });
 
@@ -418,13 +411,13 @@ namespace EducationPlatform.Infra.Data.Migrations
                     b.HasOne("EducationPlatform.Domain.Entity.Signature", "Signature")
                         .WithMany()
                         .HasForeignKey("SignatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("EducationPlatform.Domain.Entity.UserEntity", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Signature");
@@ -452,17 +445,6 @@ namespace EducationPlatform.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("UserSignature");
-                });
-
-            modelBuilder.Entity("EducationPlatform.Domain.Entity.UserEntity", b =>
-                {
-                    b.HasOne("EducationPlatform.Domain.Entity.Signature", "Signature")
-                        .WithMany()
-                        .HasForeignKey("SignatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Signature");
                 });
 
             modelBuilder.Entity("EducationPlatform.Domain.Entity.Block", b =>

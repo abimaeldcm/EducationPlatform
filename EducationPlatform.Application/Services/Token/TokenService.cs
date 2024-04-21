@@ -24,16 +24,21 @@ namespace EducationPlatform.Application.Services.Token
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("id", user.Id.ToString()),
-                    new Claim("UserSignature", user.UserSignature.SignatureId.ToString()),
-                    new Claim(ClaimTypes.Name, user.FullName.ToString()),
-                    new Claim(ClaimTypes.Role, user.Profile.ToString()),
+            new Claim("id", user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.FullName.ToString()),
+            new Claim(ClaimTypes.Role, user.AccessLevel.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
+
+            // Adiciona o claim personalizado "UserSignature" se o usuário tiver uma assinatura definida
+            if (user.UserSignature != null)
+            {
+                tokenDescriptor.Subject.AddClaim(new Claim("UserSignature", user.UserSignature.SignatureId.ToString()));
+            }
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);

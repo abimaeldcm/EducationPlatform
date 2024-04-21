@@ -1,5 +1,6 @@
 ﻿using EducationPlatform.Application.Interface;
 using EducationPlatform.Domain.Entity;
+using EducationPlatform.Domain.Entity.Enum;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ namespace EducationPlatform.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Manager")]
+    [Authorize(Roles = nameof(EAccessLevel.Manager))]
     public class SignatureController : ControllerBase
     {
         private readonly ICRUDService<SignatureOutput, SignatureInput> _service;

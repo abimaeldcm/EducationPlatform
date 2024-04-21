@@ -26,10 +26,20 @@ namespace EducationPlatform.Application.Services
 
         public async Task<UserOutput> FindLogin(string CPF, string password)
         {
-            var UserDb =  await _loginRepository.FindLogin(CPF, password);
+           // password = BCrypt.Net.BCrypt.HashPassword(password);
+            var UserDb = await _loginRepository.FindLogin(CPF, password);
             UserOutput UserMap = _mapper.Map<UserOutput>(UserDb);
+            if (UserDb is not null)
+            {
+                var userSiganture = await _userSignatureRepository.FindByUser(UserDb.Id);
+                if (userSiganture is null)
+                {
+                    return UserMap;
+                }
+                UserMap.UserSignature = userSiganture;
+                UserMap.UserSignature.SignatureId = userSiganture.SignatureId;
 
-            UserMap.UserSignature = await _userSignatureRepository.FindByUser(UserDb.Id);
+            }
 
             return UserMap;
         }
@@ -51,8 +61,13 @@ namespace EducationPlatform.Application.Services
         public async Task<UserOutput> Create(UserInput create)
         {
             UserEntity UserCadastro = _mapper.Map<UserEntity>(create);
+            create.Password = BCrypt.Net.BCrypt.HashPassword(create.Password);
+
+            //Chamar serviço de envio de e-mail de senha para o usuário.
+
             UserEntity UserDb = await _repository.Create(UserCadastro);
             UserOutput UserMap = _mapper.Map<UserOutput>(UserDb);
+
             return UserMap;
         }
 
@@ -64,14 +79,23 @@ namespace EducationPlatform.Application.Services
         public async Task<UserOutput> Update(int id, UserInput update)
         {
             UserEntity buscarDb = await _repository.FindById(id);
+
             if (buscarDb == null)
             {
                 throw new Exception("User não localizado");
             }
+
             UserEntity UserUpdate = _mapper.Map<UserEntity>(update);
             UserUpdate.Id = id;
+
+            if (update.Password is not null)
+            {
+                update.Password = BCrypt.Net.BCrypt.HashPassword(update.Password);
+            }
+
             UserEntity UserDb = await _repository.Update(UserUpdate);
             UserOutput UserMap = _mapper.Map<UserOutput>(UserDb);
+
             return UserMap;
         }
     }

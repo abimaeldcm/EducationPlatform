@@ -1,0 +1,39 @@
+﻿@model EducationPlatform.Web.Domain.Entity.Login;
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Education Platform";
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Login.css" />
+
+</head>
+<body style="margin:auto">
+
+
+    <div class="container">
+        <div class="left">
+            <div class="header">
+                <h2 class="animation a1">Seja Bem-vindo</h2>
+                <h4 class="animation a2">Entre com o seu CPF e senha</h4>
+            </div>
+            <form asp-controller="Login" asp-action="Logar" method="post">
+                <div class="form">
+                    <input type="text" class="form-field animation a3" asp-for="CPF" required data-val-required="Por favor, digite o seu e-mail" placeholder="Login">
+                    @Html.ValidationMessageFor(x => x.CPF)
+
+                    <input type="password" class="form-field animation a4" asp-for="Password"required data-val-required="Por favor, digite a sua senha" placeholder="Senha">
+                    <p class="animation a5"><a href="#">Esqueci a minha senha</a></p>
+                    <button asp-controller="Login" asp-action="Logar" type="submit" class="animation a6">Entrar</button>
+                </div>
+            </form>
+        </div>
+        <div class="right"></div>
+    </div>
+
+</body>

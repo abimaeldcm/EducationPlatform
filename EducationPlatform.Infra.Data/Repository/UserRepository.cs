@@ -62,7 +62,6 @@ namespace EducationPlatform.Infra.Data.Repository
             }
             catch (Exception)
             {
-
                 return false;
             }
         }
@@ -72,6 +71,32 @@ namespace EducationPlatform.Infra.Data.Repository
             _context.Users.Update(update);
             await _context.SaveChangesAsync();
             return update;
+        }
+
+        public async Task<UserEntity> UpdatePassword(int id, string OldPassword, string newPassword)
+        {
+            //Melhorar depois essa lógica.
+            try
+            {
+                var userDb = await FindById(id);
+                if (userDb is not null && OldPassword == userDb.Password)
+                {
+                    userDb.Password = newPassword;
+                    _context.Users.Update(userDb);
+                    await _context.SaveChangesAsync();
+                    return userDb;
+                }
+                else
+                {
+                    throw new ArgumentNullException("Login ou Senha inválidos");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
         }
     }
 }

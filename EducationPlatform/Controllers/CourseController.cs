@@ -1,5 +1,6 @@
 ﻿using EducationPlatform.Application.Interface;
 using EducationPlatform.Domain.Entity;
+using EducationPlatform.Domain.Entity.Enum;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,8 +34,8 @@ namespace EducationPlatform.Controllers
         {
             return Ok(await _service.FindById(id));
         }
-
         [HttpPost]
+        [Authorize(Roles = nameof(EAccessLevel.Manager))]
         public async Task<ActionResult<CourseOutput>> Create([FromBody] CourseInput create)
         {
             var result = _validator.Validate(create);
@@ -46,6 +47,7 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = nameof(EAccessLevel.Manager))]
         public async Task<ActionResult<CourseOutput>> Update(int id, [FromBody] CourseInput update)
         {
 
@@ -58,7 +60,7 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "manager")]
+        [Authorize(Roles = nameof(EAccessLevel.Manager))]
         public async Task<ActionResult<bool>> Delete(int id)
         {
             return Ok(await _service.Delete(id));

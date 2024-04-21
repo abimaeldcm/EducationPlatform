@@ -1,0 +1,88 @@
+﻿<head>
+    <link rel="stylesheet" href="~/css/NavBar.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="navbar" style="z-index:1">
+        <ul class="navbar-items flexbox-col">
+            <br>
+            <li>
+                <a class="navbar-item-inner">
+                    <a class="navbar-item-inner-icon-wrapper flexbox" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="/images/Logomin.png" alt="Bootstrap" width="30" height="30">
+                    </a>
+                </a>
+            </li>
+            <br>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Home</span>
+                </a>
+            </li>
+
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" asp-area="" asp-controller="Paciente" asp-action="Index">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="body-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Pacientes</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" asp-area="" asp-controller="Medico" asp-action="Index">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="bag-add-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Medicos</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" asp-area="" asp-controller="Atendimento" asp-action="Index">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="pulse-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Atendimentos</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" asp-area="" asp-controller="Servico" asp-action="Index">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="thermometer-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Servicos</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Support</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="settings-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Settings</span>
+                </a>
+            </li>
+            <li class="navbar-item flexbox-left">
+                <a class="navbar-item-inner flexbox-left" asp-area="" asp-controller="Home" asp-action="Sair">
+                    <div class="navbar-item-inner-icon-wrapper flexbox">
+                        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+                    </div>
+                    <span class="link-text">Sair</span>
+                </a>
+            </li>
+        </ul>
+
+    </nav>
+</body>
+<script src="~/js/NavB.js" asp-append-version="true"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

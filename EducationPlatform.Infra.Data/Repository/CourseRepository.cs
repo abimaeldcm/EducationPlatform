@@ -2,18 +2,20 @@
 using EducationPlatform.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using EducationPlatform.Domain.Entity.Enum;
 
 namespace EducationPlatform.Infra.Data.Repository
 {
     public class CourseRepository : ICRUDRepository<Course>
     {
         private readonly EducationDbContext _context;
-        private readonly ClaimsPrincipal _userClaims;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CourseRepository(EducationDbContext context, ClaimsPrincipal userClaims)
+        public CourseRepository(EducationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
-            _userClaims = userClaims;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Course> FindById(int id)
@@ -25,10 +27,21 @@ namespace EducationPlatform.Infra.Data.Repository
         {
             try
             {
-                int.TryParse(_userClaims.FindFirst("UserSignature")?.Value, out int result);
+                var user = _httpContextAccessor.HttpContext.User;
+                var userSignatureClaim = user.FindFirst("UserSignature");
+                var userClaimRole = user.FindFirst(c => c.Type == ClaimTypes.Role).Value;
 
-                return await _context.Courses.Where(x => x.SignatureId == result).Include(x => x.Block).ToListAsync();
+                if (userClaimRole is not null && userClaimRole == EAccessLevel.Manager.ToString())
+                {
+                    return _context.Courses.ToList();
+                }
+                else if (userSignatureClaim != null && int.TryParse(userSignatureClaim.Value, out int userSignatureId))
+                {
+                    return await _context.Courses.Where(x => x.SignatureId == userSignatureId).Include(x => x.Block).ToListAsync();
 
+                }
+
+                return new List<Course>();
             }
             catch (Exception)
             {

@@ -13,12 +13,14 @@ namespace EducationPlatform.Infra.Data.Configurations
             builder.HasOne(us => us.User)
                    .WithMany()
                     .HasForeignKey(ulc => ulc.UserId)
-                   .IsRequired();
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(us => us.Signature)
                    .WithMany()
                    .HasForeignKey(ulc => ulc.SignatureId)
-                   .IsRequired();
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
