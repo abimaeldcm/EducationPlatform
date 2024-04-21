@@ -50,7 +50,7 @@ namespace EducationPlatform.Web.Controllers
                         return RedirectToAction("Index", "Home");
                     }
 
-                    return RedirectToAction("Index", "HomeAdm");
+                    return RedirectToAction("Index", "HomeManager");
                 }
                 TempData["MensagemErro"] = "Login ou senha estão incorretos";
 

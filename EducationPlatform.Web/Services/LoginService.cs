@@ -37,7 +37,7 @@ namespace EducationPlatform.Web.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var apiResponse = await response.Content.ReadAsStringAsync();
-                    Login = JsonSerializer.Deserialize<UserOutput>(apiResponse, _options);
+                    Login = JsonSerializer.Deserialize<UserLogged>(apiResponse, _options);
                 }
                 else
                 {
