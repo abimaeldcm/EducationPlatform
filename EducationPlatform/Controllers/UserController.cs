@@ -55,7 +55,6 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = nameof(EAccessLevel.Manager))]
         public async Task<ActionResult<List<UserOutput>>> GetAll()
         {
             return Ok(await _service.GetAll());

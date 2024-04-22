@@ -54,7 +54,7 @@ namespace EducationPlatform.Web.Controllers
                 }
                 TempData["MensagemErro"] = "Login ou senha estão incorretos";
 
-                return View("Index");
+                return View("Index", usuarioDB);
             }
             catch (Exception msg)
             {

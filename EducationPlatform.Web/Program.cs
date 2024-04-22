@@ -1,12 +1,16 @@
+using Consultorio.Web.Services;
 using Consultorio.Web.Services.Interfaces;
+using EducationPlatform.Web.Domain.Entity;
 using EducationPlatform.Web.Helper;
 using EducationPlatform.Web.Services;
+using EducationPlatform.Web.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<ICRUD<UserOutput, UserInput>, UserService>();
 builder.Services.AddScoped<ISessao, Sessao>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

@@ -17,9 +17,9 @@ namespace EducationPlatform.Web.Controllers
 
         public async Task<ActionResult<IEnumerable<UserOutput>>> Index()
         {
-            var MedicoDb = await _userService.BuscarTodos();
+            var UsersDb = await _userService.BuscarTodos();
 
-            return View(MedicoDb);
+            return View(UsersDb);
         }
 
         public async Task<ActionResult> Details(int id)

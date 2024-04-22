@@ -95,6 +95,7 @@ namespace Consultorio.Web.Services
                     }
                 }
             }
+            
             return users;
         }
 

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model EducationPlatform.Web.Domain.Entity.Enum.EAccessLevel;
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -8,13 +10,22 @@
 
 </head>
 <body>
-    @await Html.PartialAsync("NavBar.cshtml")
+    @{
+        if (Model == EducationPlatform.Web.Domain.Entity.Enum.EAccessLevel.Student)
+        {
+            @await Html.PartialAsync("NavBar.cshtml")
+        }
+        else
+        {
+            @await Html.PartialAsync("NavBarManager.cshtml")
+        }
+    }
 
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>    
+    </div>
 </body>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
