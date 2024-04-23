@@ -1,4 +1,4 @@
-﻿@model EducationPlatform.Web.Domain.Entity.CourseOutput
+﻿@model EducationPlatform.Web.Domain.Entity.BlockOutput
 
 @{
     ViewData["Title"] = "Edit";
@@ -31,7 +31,12 @@
                 <label asp-for="CreationDate" class="control-label"></label>
                 <input asp-for="CreationDate" class="form-control" />
                 <span asp-validation-for="CreationDate" class="text-danger"></span>
-            </div>            
+            </div>
+            <div class="form-group">
+                <label asp-for="IdCourse" class="control-label"></label>
+                <input asp-for="IdCourse" class="form-control" />
+                <span asp-validation-for="IdCourse" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

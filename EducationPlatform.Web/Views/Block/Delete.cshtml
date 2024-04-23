@@ -1,4 +1,4 @@
-﻿@model EducationPlatform.Web.Domain.Entity.CourseOutput
+﻿@model EducationPlatform.Web.Domain.Entity.BlockOutput
 
 @{
     ViewData["Title"] = "Delete";
@@ -35,7 +35,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CreationDate)
         </dd>
-       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdCourse)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdCourse)
+        </dd>
     </dl>
     
     <form asp-action="Delete">
