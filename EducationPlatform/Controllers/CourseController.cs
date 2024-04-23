@@ -11,7 +11,7 @@ namespace EducationPlatform.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+ //   [Authorize]
     public class CourseController : ControllerBase
     {
         private readonly ICRUDService<CourseOutput, CourseInput> _service;
@@ -35,7 +35,7 @@ namespace EducationPlatform.Controllers
             return Ok(await _service.FindById(id));
         }
         [HttpPost]
-        [Authorize(Roles = nameof(EAccessLevel.Manager))]
+       // [Authorize(Roles = nameof(EAccessLevel.Manager))]
         public async Task<ActionResult<CourseOutput>> Create([FromBody] CourseInput create)
         {
             var result = _validator.Validate(create);
@@ -47,7 +47,7 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [Authorize(Roles = nameof(EAccessLevel.Manager))]
+       // [Authorize(Roles = nameof(EAccessLevel.Manager))]
         public async Task<ActionResult<CourseOutput>> Update(int id, [FromBody] CourseInput update)
         {
 
@@ -60,7 +60,7 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = nameof(EAccessLevel.Manager))]
+       // [Authorize(Roles = nameof(EAccessLevel.Manager))]
         public async Task<ActionResult<bool>> Delete(int id)
         {
             return Ok(await _service.Delete(id));

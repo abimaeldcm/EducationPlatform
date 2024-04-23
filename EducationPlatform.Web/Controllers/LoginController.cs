@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Consultorio.Web.Services.Interfaces;
 using EducationPlatform.Web.Helper;
 using EducationPlatform.Web.Domain.Entity;
+using EducationPlatform.Web.Services.Interfaces;
 
 namespace EducationPlatform.Web.Controllers
 {

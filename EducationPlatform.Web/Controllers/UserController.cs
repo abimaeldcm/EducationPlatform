@@ -36,7 +36,7 @@ namespace EducationPlatform.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(IFormCollection collection)
+        public async Task<ActionResult> Create(UserInput collection)
         {
             try
             {

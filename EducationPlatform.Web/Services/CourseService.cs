@@ -7,60 +7,34 @@ using EducationPlatform.Web.Services.Interfaces;
 
 namespace EducationPlatform.Web.Services
 {
-    public class UserService : ICRUD<UserOutput, UserInput>, ILoginService
+    public class CourseService : ICRUD<CourseOutput, CourseInput>
     {
         private readonly IHttpClientFactory _ClientFactory;
-        private const string apiEndpoint = "api/User/";
-        private const string apiEndpointLogin = "api/User/Login";
+        private const string apiEndpoint = "api/Course";
         private readonly JsonSerializerOptions _options;
-        private UserOutput user;
-        private UserLogged userLogged;
-        private IEnumerable<UserOutput> users;
+        private CourseOutput course;
+        private IEnumerable<CourseOutput> courses;
         private readonly ISessao _isessao;
 
 
-        public UserService(IHttpClientFactory clientFactory, ISessao isessao)
+        public CourseService(IHttpClientFactory clientFactory, ISessao isessao)
         {
             _ClientFactory = clientFactory;
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             _isessao = isessao;
         }
 
-        public async Task<UserLogged> FindLogin(Login user)
-        {                       
-
-            var client = _ClientFactory.CreateClient("EducationPlatform");
-
-            var content = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
-
-            using (var response = await client.PostAsync(apiEndpointLogin, content))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    var apiResponse = await response.Content.ReadAsStringAsync();
-                    userLogged = JsonSerializer.Deserialize<UserLogged>(apiResponse, _options);
-                }
-                else
-                {
-                    throw new Exception(await response.Content.ReadAsStringAsync());
-                }
-            }
-
-            return userLogged;
-        }
-
-
-        public async Task<UserOutput> BuscarPorId(int id)
+        public async Task<CourseOutput> BuscarPorId(int id)
         {
             var client = _ClientFactory.CreateClient("EducationPlatform");
 
-            var sessaoUser = _isessao.BuscarSessaoDoUsuario();
+            var sessaoCourse = _isessao.BuscarSessaoDoUsuario();
 
-            if (sessaoUser != null && !string.IsNullOrEmpty(sessaoUser.Token))
+            if (sessaoCourse != null && !string.IsNullOrEmpty(sessaoCourse.Token))
             {
-                var tokenJwt = sessaoUser.Token;
+                var tokenJwt = sessaoCourse.Token;
 
-                var requestUri = $"https://localhost:7018/api/User/{id}";
+                var requestUri = $"https://localhost:7018/api/Course/{id}";
 
                 var request = new HttpRequestMessage
                 {
@@ -75,30 +49,30 @@ namespace EducationPlatform.Web.Services
                     if (response.IsSuccessStatusCode)
                     {
                         var apiResponse = await response.Content.ReadAsStringAsync();
-                        user = JsonSerializer.Deserialize<UserOutput>(apiResponse, _options);
+                        course = JsonSerializer.Deserialize<CourseOutput>(apiResponse, _options);
                     }
                 }
             }
 
-            return user;
+            return course;
         }
 
-        public async Task<IEnumerable<UserOutput>> BuscarTodos()
+        public async Task<IEnumerable<CourseOutput>> BuscarTodos()
         {
             var client = _ClientFactory.CreateClient("EducationPlatform");
 
-            var sessaoUser = _isessao.BuscarSessaoDoUsuario();
+            var sessaoCourse = _isessao.BuscarSessaoDoUsuario();
 
-            IEnumerable<UserOutput> users = null;
+            IEnumerable<CourseOutput> Courses = null;
 
-            if (sessaoUser != null && !string.IsNullOrEmpty(sessaoUser.Token))
+            if (sessaoCourse != null && !string.IsNullOrEmpty(sessaoCourse.Token))
             {
-                var tokenJwt = sessaoUser.Token;
+                var tokenJwt = sessaoCourse.Token;
 
                 var request = new HttpRequestMessage
                 {
                     Method = HttpMethod.Get,
-                    RequestUri = new Uri("https://localhost:7018/api/User"),
+                    RequestUri = new Uri("https://localhost:7018/api/Course"),
                 };
 
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", tokenJwt);
@@ -108,27 +82,27 @@ namespace EducationPlatform.Web.Services
                     if (response.IsSuccessStatusCode)
                     {
                         var apiResponse = await response.Content.ReadAsStringAsync();
-                        users = JsonSerializer.Deserialize<IEnumerable<UserOutput>>(apiResponse, _options);
+                        courses = JsonSerializer.Deserialize<IEnumerable<CourseOutput>>(apiResponse, _options);
                     }
                 }
             }
 
-            return users;
+            return courses;
         }
 
-        public async Task<IEnumerable<UserOutput>> BuscarPorTexto(string termoPesquisa)
+        public async Task<IEnumerable<CourseOutput>> BuscarPorTexto(string termoPesquisa)
         {
             var client = _ClientFactory.CreateClient("EducationPlatform");
 
-            var sessaoUser = _isessao.BuscarSessaoDoUsuario();
+            var sessaoCourse = _isessao.BuscarSessaoDoUsuario();
 
-            IEnumerable<UserOutput> users = null;
+            IEnumerable<CourseOutput> Courses = null;
 
-            if (sessaoUser != null && !string.IsNullOrEmpty(sessaoUser.Token))
+            if (sessaoCourse != null && !string.IsNullOrEmpty(sessaoCourse.Token))
             {
-                var tokenJwt = sessaoUser.Token;
+                var tokenJwt = sessaoCourse.Token;
 
-                var requestUri = $"https://localhost:7018/api/User/BuscarPorTexto/{termoPesquisa}";
+                var requestUri = $"https://localhost:7018/api/Course/BuscarPorTexto/{termoPesquisa}";
 
                 var request = new HttpRequestMessage
                 {
@@ -143,28 +117,28 @@ namespace EducationPlatform.Web.Services
                     if (response.IsSuccessStatusCode)
                     {
                         var apiResponse = await response.Content.ReadAsStringAsync();
-                        users = JsonSerializer.Deserialize<IEnumerable<UserOutput>>(apiResponse, _options);
+                        courses = JsonSerializer.Deserialize<IEnumerable<CourseOutput>>(apiResponse, _options);
                     }
                 }
             }
 
-            return users;
+            return courses;
         }
 
-        public async Task<UserOutput> Cadastrar(UserInput cadastrar)
+        public async Task<CourseOutput> Cadastrar(CourseInput cadastrar)
         {
             var client = _ClientFactory.CreateClient("EducationPlatform");
 
-            var sessaoUser = _isessao.BuscarSessaoDoUsuario();
+            var sessaoCourse = _isessao.BuscarSessaoDoUsuario();
 
-            if (sessaoUser != null && !string.IsNullOrEmpty(sessaoUser.Token))
+            if (sessaoCourse != null && !string.IsNullOrEmpty(sessaoCourse.Token))
             {
-                var tokenJwt = sessaoUser.Token;
+                var tokenJwt = sessaoCourse.Token;
 
                 var request = new HttpRequestMessage
                 {
                     Method = HttpMethod.Post,
-                    RequestUri = new Uri("https://localhost:7018/api/User"),
+                    RequestUri = new Uri("https://localhost:7018/api/Course"),
                     Content = new StringContent(JsonSerializer.Serialize(cadastrar), Encoding.UTF8, "application/json")
                 };
 
@@ -175,28 +149,28 @@ namespace EducationPlatform.Web.Services
                     if (response.IsSuccessStatusCode)
                     {
                         var apiResponse = await response.Content.ReadAsStringAsync();
-                        user = JsonSerializer.Deserialize<UserOutput>(apiResponse, _options);
+                        course = JsonSerializer.Deserialize<CourseOutput>(apiResponse, _options);
                     }
                 }
             }
 
-            return user;
+            return course;
         }
 
         public async Task<bool> Delete(int id)
         {
             var client = _ClientFactory.CreateClient("EducationPlatform");
 
-            var sessaoUser = _isessao.BuscarSessaoDoUsuario();
+            var sessaoCourse = _isessao.BuscarSessaoDoUsuario();
 
-            if (sessaoUser != null && !string.IsNullOrEmpty(sessaoUser.Token))
+            if (sessaoCourse != null && !string.IsNullOrEmpty(sessaoCourse.Token))
             {
-                var tokenJwt = sessaoUser.Token;
+                var tokenJwt = sessaoCourse.Token;
 
                 var request = new HttpRequestMessage
                 {
                     Method = HttpMethod.Delete,
-                    RequestUri = new Uri($"https://localhost:7018/api/User/{id}"),
+                    RequestUri = new Uri($"https://localhost:7018/api/Course/{id}"),
                 };
 
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", tokenJwt);
@@ -210,20 +184,20 @@ namespace EducationPlatform.Web.Services
             return false;
         }
 
-        public async Task<object> Editar(int id, UserInput editar)
+        public async Task<object> Editar(int id, CourseInput editar)
         {
             var client = _ClientFactory.CreateClient("EducationPlatform");
 
-            var sessaoUser = _isessao.BuscarSessaoDoUsuario();
+            var sessaoCourse = _isessao.BuscarSessaoDoUsuario();
 
-            if (sessaoUser != null && !string.IsNullOrEmpty(sessaoUser.Token))
+            if (sessaoCourse != null && !string.IsNullOrEmpty(sessaoCourse.Token))
             {
-                var tokenJwt = sessaoUser.Token;
+                var tokenJwt = sessaoCourse.Token;
 
                 var request = new HttpRequestMessage
                 {
                     Method = HttpMethod.Put,
-                    RequestUri = new Uri($"https://localhost:7018/api/User/{id}"),
+                    RequestUri = new Uri($"https://localhost:7018/api/Course/{id}"),
                     Content = new StringContent(JsonSerializer.Serialize(editar), Encoding.UTF8, "application/json")
                 };
 
@@ -234,7 +208,7 @@ namespace EducationPlatform.Web.Services
                     if (response.IsSuccessStatusCode)
                     {
                         var apiResponse = await response.Content.ReadAsStringAsync();
-                        user = JsonSerializer.Deserialize<UserOutput>(apiResponse, _options);
+                        course = JsonSerializer.Deserialize<CourseOutput>(apiResponse, _options);
                     }
                     else
                     {
@@ -243,9 +217,8 @@ namespace EducationPlatform.Web.Services
                 }
             }
 
-            return user;
+            return course;
         }
 
     }
 }
-

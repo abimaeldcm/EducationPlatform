@@ -55,6 +55,7 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public async Task<ActionResult<List<UserOutput>>> GetAll()
         {
             return Ok(await _service.GetAll());
@@ -75,7 +76,7 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = nameof(EAccessLevel.Manager))]
+        //[Authorize(Roles = nameof(EAccessLevel.Manager))]
         public async Task<ActionResult<UserOutput>> Create(UserInput create)
         {
             var result = _validator.Validate(create);
@@ -87,7 +88,7 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [Authorize()]
+        //[Authorize()]
         public async Task<ActionResult<UserOutput>> Update(int id, UserInput update)
         {
             var user = _httpContextAccessor.HttpContext.User;
@@ -105,7 +106,7 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = nameof(EAccessLevel.Manager))]
+        //[Authorize(Roles = nameof(EAccessLevel.Manager))]
         public async Task<ActionResult<bool>> Delete(int id)
         {
             return Ok(await _service.Delete(id));

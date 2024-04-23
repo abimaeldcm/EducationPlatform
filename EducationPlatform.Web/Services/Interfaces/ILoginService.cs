@@ -1,6 +1,6 @@
 ﻿using EducationPlatform.Web.Domain.Entity;
 
-namespace Consultorio.Web.Services.Interfaces
+namespace EducationPlatform.Web.Services.Interfaces
 {
     public interface ILoginService
     {

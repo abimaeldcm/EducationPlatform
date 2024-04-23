@@ -1,6 +1,6 @@
 ﻿using EducationPlatform.Web.Domain.Entity.Enum;
 
-namespace EducationPlatform.Domain.Entity
+namespace EducationPlatform.Web.Domain.Entity
 {
     public class CourseInput
     {

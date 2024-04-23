@@ -9,17 +9,19 @@ namespace EducationPlatform.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ISessao _sessao;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public HomeController(ISessao sessao)
+        public HomeController(ISessao sessao, IHttpContextAccessor httpContextAccessor)
         {
             _sessao = sessao;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Index()
         {
-            var UsuarioSessao = _sessao.BuscarSessaoDoUsuario();
-            EAccessLevel Profille = UsuarioSessao.User.AccessLevel;
-            return View(Profille);
+            var valor = _httpContextAccessor.HttpContext.Session.GetString("MinhaChave");
+
+            return View();
         }
 
         public IActionResult Sair()

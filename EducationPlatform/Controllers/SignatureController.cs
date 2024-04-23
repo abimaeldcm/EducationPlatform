@@ -10,7 +10,7 @@ namespace EducationPlatform.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = nameof(EAccessLevel.Manager))]
+    //[Authorize(Roles = nameof(EAccessLevel.Manager))]
     public class SignatureController : ControllerBase
     {
         private readonly ICRUDService<SignatureOutput, SignatureInput> _service;
@@ -58,7 +58,7 @@ namespace EducationPlatform.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "manager")]
+        //[Authorize(Roles = "manager")]
         public async Task<ActionResult<bool>> Delete(int id)
         {
             return Ok(await _service.Delete(id));
