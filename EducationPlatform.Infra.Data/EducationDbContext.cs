@@ -1,5 +1,6 @@
 ﻿using EducationPlatform.Domain.Entity;
 using EducationPlatform.Domain.Entity.EntityRelational;
+using EducationPlatform.Domain.Entity.Users;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 

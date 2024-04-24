@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EducationPlatform.Web.Domain.Entity.CourseOutput>
+﻿@model IEnumerable<EducationPlatform.Web.Domain.Entity.LessonOutput>
 
 @{
     ViewData["Title"] = "Index";
@@ -24,13 +24,16 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cover)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CreationDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AccessLevel)
+                @Html.DisplayNameFor(model => model.LinkVideo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlockId)
             </th>
             <th></th>
         </tr>
@@ -48,18 +51,21 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <img src="@Html.DisplayFor(modelItem => item.Cover)" alt="Alternate Text" /> 
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CreationDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccessLevel)
+                @Html.DisplayFor(modelItem => item.LinkVideo)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlockId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
             </td>
         </tr>
 }

@@ -3,6 +3,7 @@ using EducationPlatform.Application.Services.Token;
 using EducationPlatform.Application.Validations.UserValidations;
 using EducationPlatform.Domain.Entity;
 using EducationPlatform.Domain.Entity.Enum;
+using EducationPlatform.Domain.Entity.Users;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

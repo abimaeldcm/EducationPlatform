@@ -1,4 +1,5 @@
 ﻿using EducationPlatform.Domain.Entity.Enum;
+using EducationPlatform.Domain.Entity.Users;
 
 namespace EducationPlatform.Domain.Entity.EntityRelational
 {

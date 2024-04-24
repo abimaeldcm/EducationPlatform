@@ -1,4 +1,6 @@
-﻿namespace EducationPlatform.Domain.Entity.EntityRelational
+﻿using EducationPlatform.Domain.Entity.Users;
+
+namespace EducationPlatform.Domain.Entity.EntityRelational
 {
     public class UserLessonCompleted
     {

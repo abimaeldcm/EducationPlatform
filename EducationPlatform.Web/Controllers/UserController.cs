@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using EducationPlatform.Web.Domain.Entity;
 using EducationPlatform.Web.Services.Interfaces;
+using EducationPlatform.Web.Domain.Entity.Enum;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EducationPlatform.Web.Controllers
 {
@@ -9,10 +11,12 @@ namespace EducationPlatform.Web.Controllers
     public class UserController : Controller
     {
         private readonly ICRUD<UserOutput, UserInput> _userService;
+        private readonly ICRUD<SignatureOutput, SignatureInput> _signatureService;
 
-        public UserController(ICRUD<UserOutput, UserInput> userService)
+        public UserController(ICRUD<UserOutput, UserInput> userService, ICRUD<SignatureOutput, SignatureInput> signatureService)
         {
             _userService = userService;
+            _signatureService = signatureService;
         }
 
         public async Task<ActionResult<IEnumerable<UserOutput>>> Index()
@@ -29,24 +33,25 @@ namespace EducationPlatform.Web.Controllers
 
         public async Task<ActionResult> Create()
         {
-            /* ViewBag.BloodType = new SelectList(Enum.GetValues(typeof(ETBloodType)));
-             ViewBag.SpecialityMedical = new SelectList((await _SpecialityService.BuscarTodos()).OrderBy(s => s.MedicalSpeciality), "Id", "MedicalSpeciality");*/
+            ViewBag.ProfileType = new SelectList(Enum.GetValues(typeof(EProfile)));
+            ViewBag.SignatureType = new SelectList((await _signatureService.BuscarTodos()).OrderBy(s => s.Name), "Id", "Name");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(UserInput collection)
+        public async Task<ActionResult> Create(UserInput userCreate)
         {
             try
             {
-                //ViewBag.SpecialityId = new SelectList((await _SpecialityService.BuscarTodos()).OrderBy(s => s.MedicalSpeciality), "Id", "Name");
-
+                await _userService.Cadastrar(userCreate);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ViewBag.ProfileType = new SelectList(Enum.GetValues(typeof(EProfile)));
+                ViewBag.SignatureType = new SelectList((await _signatureService.BuscarTodos()).OrderBy(s => s.Name), "Id", "Name");
+                return View(userCreate);
             }
         }
 

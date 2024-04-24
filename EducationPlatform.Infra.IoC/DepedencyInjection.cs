@@ -3,6 +3,7 @@ using EducationPlatform.Application.Service;
 using EducationPlatform.Application.Services;
 using EducationPlatform.Domain.Entity;
 using EducationPlatform.Domain.Entity.EntityRelational;
+using EducationPlatform.Domain.Entity.Users;
 using EducationPlatform.Infra.Data.Interfaces;
 using EducationPlatform.Infra.Data.Repository;
 using Microsoft.Extensions.Configuration;

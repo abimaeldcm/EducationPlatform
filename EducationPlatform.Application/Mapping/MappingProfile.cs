@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EducationPlatform.Domain.Entity;
+using EducationPlatform.Domain.Entity.Users;
 
 namespace EducationPlatform.Application.Mapping
 {

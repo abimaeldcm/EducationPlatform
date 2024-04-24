@@ -42,7 +42,6 @@ public class Program
         builder.Services.AddInjections(builder.Configuration);
 
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
         builder.Services.AddSwaggerGen(c =>
         {
 

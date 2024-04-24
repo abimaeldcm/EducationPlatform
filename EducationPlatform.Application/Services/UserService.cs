@@ -2,6 +2,7 @@
 using EducationPlatform.Application.Interface;
 using EducationPlatform.Domain.Entity;
 using EducationPlatform.Domain.Entity.EntityRelational;
+using EducationPlatform.Domain.Entity.Users;
 using EducationPlatform.Infra.Data.Interfaces;
 
 namespace EducationPlatform.Application.Services

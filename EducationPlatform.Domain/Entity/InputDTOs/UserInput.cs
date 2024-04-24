@@ -12,5 +12,8 @@ namespace EducationPlatform.Domain.Entity
         public string PhoneNumber { get; set; }
         public EProfile Profile { get; set; }
         public bool IsActive { get; set; }
+
+        public int SignatureId { get; set; }
+        public Signature Signature { get; set; }
     }
 }

@@ -1,79 +1,71 @@
-﻿@model EducationPlatform.Web.Domain.Entity.UserOutput
+﻿@model EducationPlatform.Web.Domain.Entity.UserInput
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutManager.cshtml";
 }
 
-<h1>Create</h1>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,200" />
+    <link rel="stylesheet" href="~/css/PagEditCreate.css">
+</head>
 
-<h4>UserOutput</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
+<body class="bodyy">
+
+    <div class="registration-form">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+            <div class="form-icon">
+                <span class="material-symbols-outlined">
+                    stethoscope
+                </span>
             </div>
             <div class="form-group">
-                <label asp-for="FullName" class="control-label"></label>
-                <input asp-for="FullName" class="form-control" />
+                <input type="text" asp-for="FullName" class="form-control item" placeholder="Nome">
                 <span asp-validation-for="FullName" class="text-danger"></span>
+
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input type="text" asp-for="Email" class="form-control item" placeholder="E-mail" required>
             </div>
             <div class="form-group">
-                <label asp-for="Birthday" class="control-label"></label>
-                <input asp-for="Birthday" class="form-control" />
-                <span asp-validation-for="Birthday" class="text-danger"></span>
+                <input type="date" asp-for="Birthday" class="form-control item" placeholder="Data de Nascimento" required>
             </div>
             <div class="form-group">
-                <label asp-for="CPF" class="control-label"></label>
-                <input asp-for="CPF" class="form-control" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
+                <input type="text" asp-for="CPF" class="form-control item" placeholder="CPF sem pontos e traços" required>
             </div>
             <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <input type="tel" asp-for="PhoneNumber" class="form-control item" placeholder="Telefone" required>
             </div>
             <div class="form-group">
-                <label asp-for="AccessLevel" class="control-label"></label>
-                <input asp-for="AccessLevel" class="form-control" />
-                <span asp-validation-for="AccessLevel" class="text-danger"></span>
+                <select asp-for="Profile" asp-items="@ViewBag.ProfileType" class="form-control item" required>
+                    <option>Perfil...</option>
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="Profile" class="control-label"></label>
-                <input asp-for="Profile" class="form-control" />
-                <span asp-validation-for="Profile" class="text-danger"></span>
+                <select asp-for="SignatureId" asp-items="@ViewBag.SignatureType" class="form-control item" required>
+                    <option>Assinatura...</option>
+                </select>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserSignatureId" class="control-label"></label>
-                <input asp-for="UserSignatureId" class="form-control" />
-                <span asp-validation-for="UserSignatureId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div style=" display: flex; justify-content: center;">
+                <div class="form-group">
+                    <button type="submit" value="Create" class="btn btn-block create-account">Criar</button>
+                    <a asp-action="Index" class="btn btn-block create-account">Voltar</a>
+                </div>
+
             </div>
         </form>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="assets/js/script.js"></script>
+</html>

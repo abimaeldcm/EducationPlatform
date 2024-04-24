@@ -1,4 +1,4 @@
-﻿using EducationPlatform.Domain.Entity;
+﻿using EducationPlatform.Domain.Entity.Users;
 
 namespace EducationPlatform.Infra.Data.Interfaces
 {

@@ -1,6 +1,6 @@
 ﻿using EducationPlatform.Infra.Data.Interfaces;
-using EducationPlatform.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
+using EducationPlatform.Domain.Entity.Users;
 
 namespace EducationPlatform.Infra.Data.Repository
 {
