@@ -5,5 +5,6 @@ namespace EducationPlatform.Web.Services.Interfaces
     public interface ILoginService
     {
         Task<UserLogged> FindLogin(Login user);
+        Task<UserOutput> Create(UserInput user);
     }
 }

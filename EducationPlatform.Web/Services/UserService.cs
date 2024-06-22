@@ -247,6 +247,10 @@ namespace EducationPlatform.Web.Services
             return user;
         }
 
+        public Task<UserOutput> Create(UserInput user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

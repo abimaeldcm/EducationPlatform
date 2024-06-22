@@ -2,8 +2,8 @@
 {
     public enum EProfile : int
     {
-        FullAccess,
-        Start,
-        Expert
+        FullAccess = 1,
+        Start = 2,
+        Expert = 3,
     }
 }

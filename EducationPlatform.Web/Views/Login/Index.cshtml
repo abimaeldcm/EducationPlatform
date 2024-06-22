@@ -29,6 +29,7 @@
 
                     <input type="password" class="form-field animation a4" asp-for="Password"required data-val-required="Por favor, digite a sua senha" placeholder="Senha">
                     <p class="animation a5"><a href="#">Esqueci a minha senha</a></p>
+                    <p class="animation a5"><a asp-controller="Login" asp-action="Criar">Criar Conta</a></p>
                     <button asp-controller="Login" asp-action="Logar" type="submit" class="animation a6">Entrar</button>
                 </div>
             </form>

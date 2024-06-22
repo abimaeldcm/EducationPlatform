@@ -62,6 +62,19 @@ namespace EducationPlatform.Web.Controllers
                 return View("Index");
             }
         }
+
+        public IActionResult Criar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Criar(UserInput usuario)
+        {
+            await _loginService.Create(usuario);
+            return View();
+        }
+
         public IActionResult EsqueciSenha()
         {
             return View("PrimeiroLogin");

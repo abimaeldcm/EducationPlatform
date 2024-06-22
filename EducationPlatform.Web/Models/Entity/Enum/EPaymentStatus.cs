@@ -2,9 +2,9 @@
 {
     public enum EPaymentStatus : int
     {
-        Success,
-        Failure,
-        Pending,
-        Late
+        Success = 1,
+        Failure = 2,
+        Pending = 3,
+        Late = 4,
     }
 }

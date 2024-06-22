@@ -16,6 +16,7 @@ namespace EducationPlatform.Web.Controllers
         {
             _sessao = sessao;
         }
+
         public IActionResult Index()
         {
             var UsuarioSessao = _sessao.BuscarSessaoDoUsuario();

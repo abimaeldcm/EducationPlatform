@@ -2,7 +2,7 @@
 {
     public enum EAccessLevel : int
     {
-        Manager,
-        Student
+        Manager = 1,
+        Student = 2,
     }
 }

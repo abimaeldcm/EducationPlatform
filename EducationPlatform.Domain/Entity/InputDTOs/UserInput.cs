@@ -14,6 +14,5 @@ namespace EducationPlatform.Domain.Entity
         public bool IsActive { get; set; }
 
         public int SignatureId { get; set; }
-        public Signature Signature { get; set; }
     }
 }
