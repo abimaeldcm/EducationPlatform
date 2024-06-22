@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EducationPlatform.Application.Interface;
+using EducationPlatform.Application.Services.Assas;
 using EducationPlatform.Domain.Entity;
 using EducationPlatform.Domain.Entity.EntityRelational;
 using EducationPlatform.Domain.Entity.Users;
@@ -15,14 +16,16 @@ namespace EducationPlatform.Application.Services
         private readonly IUserSignatureRepository _userSignatureRepository;
         private readonly ILoginRepository _loginRepository;
         private readonly IMapper _mapper;
+        private readonly IAPIAssas _aPIAssas;
 
-        public UserService(ICRUDRepository<UserEntity> repository, ICRUDRepository<UserSignature> signatureRepository, IUserSignatureRepository userSignatureRepository, ILoginRepository loginRepository, IMapper mapper)
+        public UserService(ICRUDRepository<UserEntity> repository, ICRUDRepository<UserSignature> signatureRepository, IUserSignatureRepository userSignatureRepository, ILoginRepository loginRepository, IMapper mapper, IAPIAssas aPIAssas)
         {
             _repository = repository;
             _signatureRepository = signatureRepository;
             _userSignatureRepository = userSignatureRepository;
             _loginRepository = loginRepository;
             _mapper = mapper;
+            _aPIAssas = aPIAssas;
         }
 
         public async Task<UserOutput> FindLogin(string CPF, string password)
@@ -65,6 +68,8 @@ namespace EducationPlatform.Application.Services
             create.Password = BCrypt.Net.BCrypt.HashPassword(create.Password);
 
             //Chamar serviço de envio de e-mail de senha para o usuário.
+            var userAssas = await _aPIAssas.Create(UserCadastro);
+            UserCadastro.AssasId = userAssas.id;
 
             UserEntity UserDb = await _repository.Create(UserCadastro);
             UserOutput UserMap = _mapper.Map<UserOutput>(UserDb);

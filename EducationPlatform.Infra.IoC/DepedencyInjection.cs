@@ -1,6 +1,7 @@
 ﻿using EducationPlatform.Application.Interface;
 using EducationPlatform.Application.Service;
 using EducationPlatform.Application.Services;
+using EducationPlatform.Application.Services.Assas;
 using EducationPlatform.Domain.Entity;
 using EducationPlatform.Domain.Entity.EntityRelational;
 using EducationPlatform.Domain.Entity.Users;
@@ -45,6 +46,8 @@ namespace EducationPlatform.Infra.IoC
             services.AddScoped<ICRUDRepository<UserEntity>, UserEntityRepository>();
             services.AddScoped<ILoginService, UserService>();
             services.AddScoped<ILoginRepository, UserEntityRepository>();
+
+            services.AddScoped<IAPIAssas, APIAssas>();
 
             services.AddSingleton<ClaimsPrincipal>();
 

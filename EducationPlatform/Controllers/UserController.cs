@@ -85,7 +85,8 @@ namespace EducationPlatform.Controllers
             {
                 return BadRequest(result.Errors);
             }
-            return Ok(await _service.Create(create));
+            var userDb = await _service.Create(create);
+            return Ok(userDb);
         }
 
         [HttpPut("{id:int}")]

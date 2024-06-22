@@ -13,5 +13,9 @@ namespace EducationPlatform.Domain.Entity.Users
         public string PhoneNumber { get; set; }
         public EAccessLevel AccessLevel { get; set; }
         public bool IsActive { get; set; }
+
+        public string AssasId { get; set; }
+        public int SignatureId { get; set; }
+        public Signature Signature { get; set; }
     }
 }
